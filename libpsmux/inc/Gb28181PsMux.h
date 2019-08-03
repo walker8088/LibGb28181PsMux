@@ -3,7 +3,6 @@
 #include "psmuxdef.h"
 
 
-
 typedef unsigned int StreamIdx;
 
 struct PsMux;
@@ -20,17 +19,17 @@ public:
 
     ~Gb28181PsMux();
     
-    //¸ù¾İÖ¸¶¨ÀàĞÍÔö¼ÓÒ»¸öÁ÷,·µ»ØÁ÷Ë÷Òı
+    //æ ¹æ®æŒ‡å®šç±»å‹å¢åŠ ä¸€ä¸ªæµ,è¿”å›æµç´¢å¼•
     StreamIdx AddStream(PsMuxStreamType Type);
 
     int MuxH265VpsSpsPpsIFrame(guint8* pBlock, int BlockLen, gint64 Pts, gint64 Dts, StreamIdx Idx,
         guint8 * outBuf, int* pOutSize, int maxOutSize);
 
-    //ÊäÈëSPS+PPS+IÖ¡,±ØĞëÒÔ00 00 00 01»òÕß00 00 01¿ªÍ·
+    //è¾“å…¥SPS+PPS+Iå¸§,å¿…é¡»ä»¥00 00 00 01æˆ–è€…00 00 01å¼€å¤´
     int MuxH264SpsPpsIFrame(guint8* pBlock, int BlockLen, gint64 Pts, gint64 Dts, StreamIdx Idx,
         guint8 * outBuf, int* pOutSize, int maxOutSize);
 
-    //ÊäÈëµ¥¸öH264/5Ö¡,±ØĞëÒÔ00 00 00 01»òÕß00 00 01¿ªÍ·,SPS PPS ºÍ IÖ¡²»ÄÜÁ¬ÔÚÒ»Æğ
+    //è¾“å…¥å•ä¸ªH264/5å¸§,å¿…é¡»ä»¥00 00 00 01æˆ–è€…00 00 01å¼€å¤´,SPS PPS å’Œ Iå¸§ä¸èƒ½è¿åœ¨ä¸€èµ·
     int MuxH264SingleFrame(guint8* pFrame, int FrameLen, gint64 Pts, gint64 Dts, StreamIdx Idx,
         guint8 * outBuf, int* pOutSize, int maxOutSize);
 
@@ -48,7 +47,7 @@ private:
 	int m_SpsPpsIBufSize;
 };
 
-//Ö¡ÀàĞÍ¶¨Òå
+//å¸§ç±»å‹å®šä¹‰
 enum NAL_type
 {
     NAL_IDR,
@@ -63,7 +62,7 @@ enum NAL_type
     NAL_TYPE_NUM
 };
 
-//ÅĞ¶ÏÊÇ·ñÊÇ264»òÕß265Ö¡,Èç¹ûÊÇË³±ã°ÑNalTypeCharÉèÖÃÒ»ÏÂ
+//åˆ¤æ–­æ˜¯å¦æ˜¯264æˆ–è€…265å¸§,å¦‚æœæ˜¯é¡ºä¾¿æŠŠNalTypeCharè®¾ç½®ä¸€ä¸‹
 bool isH264Or265Frame(guint8* buf, unsigned char* NalTypeChar);
 NAL_type getH264NALtype(guint8 c);
 NAL_type getH265NALtype(guint8 c);

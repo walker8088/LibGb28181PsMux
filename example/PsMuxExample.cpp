@@ -1,5 +1,3 @@
-// PsMuxExample.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
-//
 
 #include "Gb28181PsMux.h"
 #include <string>
@@ -88,7 +86,7 @@ struct PsProcessSaveFile : public PsMuxContext
 };
 
 
-//±éÀúblock²ğ·ÖNALU,Ö±µ½MaxSlice,²»È»Ò»Ö±±éÀúÏÂÈ¥
+//éå†blockæ‹†åˆ†NALU,ç›´åˆ°MaxSlice,ä¸ç„¶ä¸€ç›´éå†ä¸‹å»
 int process_block(guint8* pBlock, int BlockLen, int MaxSlice,  PsMuxContext* PsDst)
 {
     static guint8* pStaticBuf = new guint8[BUF_LEN];
@@ -108,13 +106,13 @@ int process_block(guint8* pBlock, int BlockLen, int MaxSlice,  PsMuxContext* PsD
     guint8* NaluEndPos   = NULL;
 
 
-    //Ò»¶ÎÊı¾İÀï×î¶àNALU¸öÊı,ÕâÑùSPS PPS ºóµÄIÖ¡ÄÇ¾Í²»ÓÃ±éÀú
+    //ä¸€æ®µæ•°æ®é‡Œæœ€å¤šNALUä¸ªæ•°,è¿™æ ·SPS PPS åçš„Iå¸§é‚£å°±ä¸ç”¨éå†
     int iSliceNum = 0;
 
     while (LastBlockLen > 4)
     {
         if(isH264Or265Frame(pCurPos,NULL)){
-            if (iSliceNum + 1 >= MaxSlice){//ÒÑ¾­µ½´ï×î´óNALU¸öÊı,ÏÂÃæµÄ²»ÓÃÕÒÁË°ÑÊ£ÏÂµÄ¼ÓÉÏ¾ÍÊÇ
+            if (iSliceNum + 1 >= MaxSlice){//å·²ç»åˆ°è¾¾æœ€å¤§NALUä¸ªæ•°,ä¸‹é¢çš„ä¸ç”¨æ‰¾äº†æŠŠå‰©ä¸‹çš„åŠ ä¸Šå°±æ˜¯
                 PsDst->Process(pCurPos, LastBlockLen);
                 break;
             }
@@ -133,7 +131,7 @@ int process_block(guint8* pBlock, int BlockLen, int MaxSlice,  PsMuxContext* PsD
         LastBlockLen--;
     }
 
-    //ÓĞÊ£ÏÂµÄ,±£´æ,ºÍºóÃæµÄÆ´ÆğÀ´
+    //æœ‰å‰©ä¸‹çš„,ä¿å­˜,å’Œåé¢çš„æ‹¼èµ·æ¥
     if (NaluStartPos){
         memcpy(pStaticBuf, NaluStartPos, LastBlockLen);
         StaticBufSize = LastBlockLen;

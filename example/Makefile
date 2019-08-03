@@ -20,7 +20,7 @@ INC_DIRS    := -I../libpsmux/inc
 
 LIB_DIRS    := -L../lib
 
-LD_LIBS     := -lpsmux
+LD_LIBS     := -lpsmux -lfaac
  
 # complie & link variable
 ifeq ($(MAKECMDGOALS), debug)   

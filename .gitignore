@@ -1,6 +1,9 @@
 /*.o
 /*.a
 /example/*.mpeg
+/example/*.h264
+/example/*.264
+/example/*.pcm
 /lib
 /obj
 /example/PsMuxExample

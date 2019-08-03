@@ -1,4 +1,4 @@
-TOOLCHAIN   := arm-linux-
+TOOLCHAIN   := 
 
 # target program
 TARGET_PROG := 

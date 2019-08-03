@@ -1,5 +1,7 @@
-/Makefile
-/example/Makefile.nxp
-/example/Makefile
 /*.o
 /*.a
+/example/*.mpeg
+/lib
+/obj
+/example/PsMuxExample
+/example/obj
